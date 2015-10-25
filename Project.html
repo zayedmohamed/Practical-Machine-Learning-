@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -84,8 +85,26 @@ library(caret)</code></pre>
 library(rpart)
 library(rpart.plot)
 library(corrplot)
-
-set.seed(12345)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:randomForest':
+## 
+##     combine
+## 
+## The following objects are masked from 'package:data.table':
+## 
+##     between, last
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>set.seed(12345)
 if(!file.exists(&quot;pml-training.csv&quot;))
 {
   download.file(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;, destfile = &quot;pml-training.csv&quot;)
@@ -206,7 +225,7 @@ accuracy</code></pre>
 <ul>
 <li>The model is aplied to the original testing data.</li>
 </ul>
-<pre class="r"><code>result &lt;- predict(model, training[, -length(names(training))])
+<pre class="r"><code>result &lt;- predict(model, select(training, -classe)) #training[, -length(names(training))])
 result</code></pre>
 </div>
 <div id="tree" class="section level2">
